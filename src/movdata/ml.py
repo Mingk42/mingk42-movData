@@ -29,6 +29,9 @@ def save_movies(year, per_page=10, sleep_time=1):
     
     baseUrl=f"https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key={API_KEY}&openStartDt={year}&openEndDt={year}"
     # 위 경로가 있으면 API 호출을 멈추고 프로그램 종료
+    if os.path.exists(file_path):
+        return True
+
     # total cnt get, total_pages calc
 
     json=req(baseUrl+"&curPage=1")

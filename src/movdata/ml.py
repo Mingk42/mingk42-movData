@@ -28,8 +28,12 @@ def save_movies(year, per_page=10, sleep_time=1):
     file_path = f"{home_path}/data/movies/year={year}/data.json"
     
     baseUrl=f"https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key={API_KEY}&openStartDt={year}&openEndDt={year}"
+
+    print(f"{year}년 영화정보를 불러옵니다.")
     # 위 경로가 있으면 API 호출을 멈추고 프로그램 종료
     if os.path.exists(file_path):
+        print(f"[Warning] 데이터가 이미 존재합니다: [File Path] {file_path}")
+        print("영화정보 불러오기를 종료합니다.")
         return True
 
     # total cnt get, total_pages calc
@@ -48,4 +52,5 @@ def save_movies(year, per_page=10, sleep_time=1):
         pass
 
     save_json(total_data, file_path)
+    print("영화정보 불러오기를 종료합니다.")
     return True

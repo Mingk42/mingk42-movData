@@ -23,33 +23,33 @@ def req(url):
     return json
 
 
-def save_movies(year, per_page=10, sleep_time=1):
+def save_movie_company(per_page=10, sleep_time=1):
     home_path = os.path.expanduser("~")
-    file_path = f"{home_path}/data/movies/movieList/year={year}/data.json"
+    file_path = f"{home_path}/data/movies/movieCompany/data.json"
     
-    baseUrl=f"https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key={API_KEY}&openStartDt={year}&openEndDt={year}"
+    baseUrl=f"https://kobis.or.kr/kobisopenapi/webservice/rest/company/searchCompanyList.json?key={API_KEY}"
 
-    print(f"{year}년 영화정보를 불러옵니다.")
     # 위 경로가 있으면 API 호출을 멈추고 프로그램 종료
+    print("영화사 불러오기를 시작합니다.")
     if os.path.exists(file_path):
         print(f"[Warning] 데이터가 이미 존재합니다: [File Path] {file_path}")
-        print("영화정보 불러오기를 종료합니다.")
+        print("영화사 불러오기를 종료합니다.")
         return True
 
     # total cnt get, total_pages calc
 
     json=req(baseUrl+"&curPage=1")
-    totCnt=json["movieListResult"]["totCnt"]
+    totCnt=json["companyListResult"]["totCnt"]
     total_pages = (totCnt // per_page) +1
     # loop in total pages, call api
     total_data=[]
 
     for page in tqdm(range(1, total_pages+1)):
-        time.sleep(sleep_time)
         json=req(baseUrl+f"&curPage={page}")
-        data=json["movieListResult"]["movieList"]
+        data=json["companyListResult"]["companyList"]
         total_data.extend(data)
+        time.sleep(sleep_time)
 
     save_json(total_data, file_path)
-    print("영화정보 불러오기를 종료합니다.")
+    print("영화사 불러오기를 종료합니다.")
     return True

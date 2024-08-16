@@ -31,6 +31,7 @@ def save_movies(year, sleep_time=1):
     if os.path.exists(file_path):
         print(f"[Warning] 데이터가 이미 존재합니다: [File Path] {file_path}")
         print("영화상세정보 불러오기를 종료합니다.")
+        return True
 
     movieCdList=extractCol(colNm="movieCd",year=year)
     total_data=[]

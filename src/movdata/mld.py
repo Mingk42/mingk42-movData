@@ -26,7 +26,7 @@ def req(url):
 
 def save_movies(year, sleep_time=1):
     home_path = os.path.expanduser("~")
-    file_path = f"{home_path}/data/movies_detail/year={year}/data.json"
+    file_path = f"{home_path}/data/movies/MovieDetail/year={year}/data.json"
     
     if os.path.exists(file_path):
         print(f"[Warning] 데이터가 이미 존재합니다: [File Path] {file_path}")

@@ -13,3 +13,7 @@ def test_save_data_2015():
 def test_save_data_2014():
     rst=save_movies(year=2014, sleep_time=0.1)
     assert rst
+
+def test_save_data_2016():
+    rst=save_movies(year=2016, sleep_time=0.1)
+    assert rst

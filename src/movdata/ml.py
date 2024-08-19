@@ -25,7 +25,7 @@ def req(url):
 
 def save_movies(year, per_page=10, sleep_time=1):
     home_path = os.path.expanduser("~")
-    file_path = f"{home_path}/data/movies/year={year}/data.json"
+    file_path = f"{home_path}/data/movies/movieList/year={year}/data.json"
     
     baseUrl=f"https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key={API_KEY}&openStartDt={year}&openEndDt={year}"
 

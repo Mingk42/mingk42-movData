@@ -40,7 +40,8 @@ def save_movies(year, per_page=10, sleep_time=1):
 
     json=req(baseUrl+"&curPage=1")
     totCnt=json["movieListResult"]["totCnt"]
-    total_pages = (totCnt // per_page) +1
+    #total_pages = (totCnt // per_page) +1
+    total_pages = 10
     # loop in total pages, call api
     total_data=[]
 

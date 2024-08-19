@@ -24,16 +24,16 @@ def req(url):
     return json
 
 
-def save_movies(year, sleep_time=1):
+def save_movie_company(sleep_time=1):
     home_path = os.path.expanduser("~")
-    file_path = f"{home_path}/data/movies/movieDetail/year={year}/data.json"
+    file_path = f"{home_path}/data/movies/movieCompanyDetail/data.json"
     
     if os.path.exists(file_path):
         print(f"[Warning] 데이터가 이미 존재합니다: [File Path] {file_path}")
-        print("영화상세정보 불러오기를 종료합니다.")
+        print("영화사 상세정보 불러오기를 종료합니다.")
         return True
 
-    movieCdList=extractCol(colNm="movieCd",file_path=f"{home_path}/data/movies/movieList/year={year}/data.json")
+    movieCompanyCdList=extractCol(colNm="companyCd",file_path="/home/root2/data/movies/movieCompany/data.json")
     total_data=[]
     """ 
     for code in tqdm(movieCdList):
@@ -45,23 +45,23 @@ def save_movies(year, sleep_time=1):
         total_data.extend(data)
         time.sleep(sleep_time)
     """
-    for i in tqdm(range(len(movieCdList))):
-        print(f"[{year}년] movieCd {movieCdList[i]}의 영화상세정보를 불러옵니다.")
-        baseUrl=f"http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key={API_KEY}&movieCd={movieCdList[i]}"
+    for i in tqdm(range(len(movieCompanyCdList))):
+        print(f"movieCompanyCd {movieCompanyCdList[i]}의 영화사 상세정보를 불러옵니다.")
+        baseUrl=f"http://www.kobis.or.kr/kobisopenapi/webservice/rest/company/searchCompanyInfo.json?key={API_KEY}&companyCd={movieCompanyCdList[i]}"
         json=req(baseUrl)
-        data=json["movieInfoResult"]["movieInfo"]
+        data=json["companyInfoResult"]["companyInfo"]
 
         total_data.extend(data)
         time.sleep(sleep_time)
     save_json(total_data, file_path)
-    print("영화상세정보 불러오기가 모두 완료되었습니다.")
+    print("영화사 상세정보 불러오기가 모두 완료되었습니다.")
     
     return True
 
-
+"""
 def call(sleep_time=1):
     home_path = os.path.expanduser("~")
-    baseDir="/home/root2/data/movies/movieList/"
+    baseDir="/home/root2/data/movies/movieCompany/"
     yearDir=os.listdir(baseDir)
 
     for d in yearDir:
@@ -69,3 +69,4 @@ def call(sleep_time=1):
         save_movies(year=y,sleep_time=sleep_time)
 
     return True
+"""

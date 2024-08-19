@@ -1,6 +1,6 @@
 [project]
 name = "movData"
-version = "0.2.0"
+version = "0.4.1"
 description = "movie api application"
 authors = [
     {name = "Mingk42", email = "xoals123456t@gmail.com"},
@@ -15,7 +15,6 @@ license = {text = "MIT"}
 
 [project.scripts]
 movdata-ping="movdata.cli:ping"
-
 
 
 [tool.pdm]
